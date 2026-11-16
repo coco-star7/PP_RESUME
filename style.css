@@ -1,0 +1,43 @@
+/* ============================================================
+   style.css - Tailwind로 표현하기 어려운 "추가 스타일" 모음
+   (비유: Tailwind가 기본 가구라면, 이 파일은 직접 짠 특별한 소품이에요)
+   ============================================================ */
+
+/* 부드러운 스크롤: 메뉴를 누르면 미끄러지듯 이동 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 스크롤 등장 효과의 "시작 상태": 투명하고 살짝 아래에 있음 */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* script.js가 .is-visible 이름표를 붙이면 "최종 상태"(보이고 제자리)로 바뀜 */
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero 뒤의 은은한 빛: 다크 배경에서 포인트 색이 살짝 번지는 효과 */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* 빛 영역이 클릭을 가로채지 않도록 */
+  background: radial-gradient(circle at 70% 40%, rgba(99, 102, 241, 0.25), transparent 60%);
+  z-index: 0;
+}
+
+/* 사용자가 "움직임 줄이기"를 켜 둔 경우 애니메이션을 끔 (접근성 배려) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
